@@ -1,0 +1,30 @@
+{
+  "name": "jira-sprint-calver-action",
+  "version": "1.0.0",
+  "packageManager": "yarn@4.9.1",
+  "installConfig": {
+    "nodeLinker": "node-modules"
+  },
+  "description": "GitHub Action: active Jira sprint → CalVer product-version",
+  "main": "dist/main.js",
+  "keywords": [
+    "github-action",
+    "jira",
+    "calver",
+    "sprint"
+  ],
+  "author": "Dmitry Ruban",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"no tests yet\" && exit 0",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "typescript": "^5.4.0"
+  }
+}

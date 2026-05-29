@@ -1,0 +1,36 @@
+name: Jira Sprint CalVer
+description: Fetches active Jira sprint → generates CalVer product-version (yyyy.sprint)
+author: YourName
+inputs:
+  jira-base-url:
+    description: Jira base URL (e.g. https://company.atlassian.net)
+    required: true
+  jira-email:
+    description: Jira account email
+    required: true
+  jira-token:
+    description: Jira API token
+    required: true
+  board-id:
+    description: Jira board ID
+    required: true
+  year:
+    description: Year for CalVer (defaults to current)
+    required: false
+    default: ''
+  format:
+    description: Output format (default yyyy.sprint)
+    required: false
+    default: 'yyyy.sprint'
+outputs:
+  product-version:
+    description: Generated CalVer e.g. 2026.22
+  sprint-number:
+    description: Parsed sprint number
+  sprint-name:
+    description: Full sprint name from Jira
+  fix-version-name:
+    description: Alias for product-version (Jira Fix Version compat)
+runs:
+  using: node20
+  main: dist/main.js
