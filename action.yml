@@ -5,15 +5,24 @@ inputs:
   jira-base-url:
     description: Jira base URL (e.g. https://company.atlassian.net)
     required: true
+  jira-host:
+    description: Legacy alias for jira-base-url
+    required: false
   jira-email:
     description: Jira account email
     required: true
   jira-token:
     description: Jira API token
     required: true
+  jira-api-token:
+    description: Legacy alias for jira-token
+    required: false
   board-id:
     description: Jira board ID
     required: true
+  project-key:
+    description: Legacy alias for board-id (expects board id value)
+    required: false
   year:
     description: Year for CalVer (defaults to current)
     required: false

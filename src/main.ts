@@ -8,17 +8,22 @@ interface Sprint {
 
 async function run(): Promise<void> {
   try {
-    const baseUrl = core.getInput('jira-base-url', { required: true });
+    const baseUrl = core.getInput('jira-base-url') || core.getInput('jira-host');
     const email = core.getInput('jira-email', { required: true });
-    const token = core.getInput('jira-token', { required: true });
-    const boardId = core.getInput('board-id', { required: true });
+    const token = core.getInput('jira-token') || core.getInput('jira-api-token');
+    const boardId = core.getInput('board-id') || core.getInput('project-key');
     const yearInput = core.getInput('year');
     const format = core.getInput('format') || 'yyyy.sprint';
 
+    if (!baseUrl) throw new Error('Missing required input: jira-base-url (or legacy jira-host)');
+    if (!token) throw new Error('Missing required input: jira-token (or legacy jira-api-token)');
+    if (!boardId) throw new Error('Missing required input: board-id (or legacy project-key)');
+
     const year = yearInput || new Date().getFullYear().toString();
+    const normalizedBaseUrl = /^https?:\/\//i.test(baseUrl) ? baseUrl : `https://${baseUrl}`;
     const auth = Buffer.from(`${email}:${token}`).toString('base64');
 
-    const url = `${baseUrl.replace(/\/$/, '')}/rest/agile/1.0/board/${boardId}/sprint?state=active`;
+    const url = `${normalizedBaseUrl.replace(/\/$/, '')}/rest/agile/1.0/board/${boardId}/sprint?state=active`;
     const res = await fetch(url, {
       headers: { Authorization: `Basic ${auth}`, Accept: 'application/json' }
     });
