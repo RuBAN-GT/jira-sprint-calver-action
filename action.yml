@@ -1,6 +1,9 @@
 name: Jira Sprint CalVer
 description: Fetches active Jira sprint → generates CalVer product-version (yyyy.sprint)
-author: YourName
+author: Dmitry Ruban
+branding:
+  color: blue
+  icon: align-right
 inputs:
   jira-base-url:
     description: Jira base URL (e.g. https://company.atlassian.net)
@@ -26,11 +29,11 @@ inputs:
   year:
     description: Year for CalVer (defaults to current)
     required: false
-    default: ''
+    default: ""
   format:
     description: Output format (default yyyy.sprint)
     required: false
-    default: 'yyyy.sprint'
+    default: "yyyy.sprint"
 outputs:
   product-version:
     description: Generated CalVer e.g. 2026.22
